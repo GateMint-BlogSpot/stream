@@ -1,0 +1,229 @@
+! function(e) {
+    "use strict";
+
+    function t(e, t) {
+        t = t || {};
+        for (var i in t) t.hasOwnProperty(i) && (e[i] = t[i]);
+        return e
+    }
+
+    function i(e, t) {
+        var i = [];
+        t = t || {};
+        for (var n in e) e.hasOwnProperty(n) && !t[n] && i.push(n + "=" + encodeURIComponent(e[n]));
+        return i.length ? "?" + i.join("&") : ""
+    }
+
+    function n(e) {
+        var t, i = e.str,
+            n = e.defaults,
+            o = {};
+        if (i.replace(/([^?=&]+)(=([^&]*))?/g, function(e, t, i, n) {
+                o[t] = decodeURIComponent(n.replace(/\+/g, " "))
+            }), n)
+            for (t in n) n.hasOwnProperty(t) && !o.hasOwnProperty(t) && (o[t] = n[t]);
+        return o
+    }
+
+    function o(e, o) {
+        var r;
+        r = n({
+            str: "ap=1302"
+        });
+        for (var d in r) r.hasOwnProperty(d) && !e.hasOwnProperty(d) && (e[d] = r[d]);
+        if (!e || !e.p) return null;
+        e.ap = e.popOnCloseClickEvt ? "1303" : e.ap || "1302", e.ct = "html", e.size = e.size || "", "" === e.size && delete e.size;
+        try {
+            e.u = encodeURI(window.top.location.href)
+        } catch (a) {
+            e.u = encodeURI(window.top !== self ? document.referrer : window.location.href)
+        }
+        e.r = encodeURI(document.referrer), e.u = e.u || e.r, e.iss = e.secure ? 1 : 0;
+        try {
+            e.f = ("undefined" == typeof navigator.plugins || 0 === navigator.plugins.length ? !!new window.ActiveXObject("ShockwaveFlash.ShockwaveFlash") : navigator.plugins["Shockwave Flash"]) ? 1 : 0
+        } catch (a) {
+            e.f = 1
+        }
+        return "http" + (e.secure ? "s" : "") + "://" + e.serverdomain + ".adk2x.com/imp" + i(e, t(o || {}, {
+            networkalias: 1,
+            serverdomain: 1,
+            secure: 1,
+            width: 1,
+            height: 1
+        }))
+    }
+
+    function r() {
+        return b = S(O) || [], !!h && +h <= +b[0]
+    }
+
+    function d() {
+        for (var e = !1, t = document.getElementsByClassName("adk2_slider_baner"), i = 0; i < t.length; i++)
+            if (t[i].getAttribute("title") === l[0]) {
+                e = !0;
+                break
+            }
+        return e
+    }
+    window.adk2ServiceObject || (window.adk2ServiceObject = {}, window.adk2ServiceObject.checkWindowWidth = function() {
+        var e;
+        return document.body && document.body.offsetWidth && (e = document.body.offsetWidth), "CSS1Compat" === document.compatMode && document.documentElement && document.documentElement.offsetWidth && (e = document.documentElement.offsetWidth), window.innerWidth && window.innerHeight && (e = window.innerWidth), e
+    }, window.adk2ServiceObject.compareWidth = function(e) {
+        var t = !1;
+        return e > window.adk2ServiceObject.checkWindowWidth() && (t = !0), t
+    }, window.adk2ServiceObject.getClientDimencions = function() {
+        var e = 0,
+            t = 0;
+        return "number" == typeof window.innerWidth ? (e = window.innerWidth, t = window.innerHeight) : document.documentElement && (document.documentElement.clientWidth || document.documentElement.clientHeight) ? (e = document.documentElement.clientWidth, t = document.documentElement.clientHeight) : document.body && (document.body.clientWidth || document.body.clientHeight) && (e = document.body.clientWidth, t = document.body.clientHeight), {
+            w: Math.round(e),
+            h: Math.round(t)
+        }
+    }), "function" != typeof document.getElementsByClassName && (document.getElementsByClassName = function() {
+        for (var e, t = document.getElementsByTagName("*"), i = [], n = 0; n < t.length; n++)
+            if (t[n].getAttribute("class")) {
+                e = t[n].getAttribute("class").split(" ");
+                for (var o = 0; o < e.length; o++) e[o].toLowerCase() === arguments[0].toLowerCase() && i.push(t[n])
+            } else if (t[n].className) {
+            e = t[n].className.split(" ");
+            for (var r = 0; r < e.length; r++) e[r].toLowerCase() === arguments[0].toLowerCase() && i.push(t[n])
+        }
+        return i
+    });
+    var a, c, s, l, w, u, m, p, b, h, v, f, k, g = function(e, t, i) {
+            t.addEventListener ? t.addEventListener(e, i, !1) : t.attachEvent && t.attachEvent("on" + e, i)
+        },
+        O = e.cookie || "adk2_slider",
+        y = -1,
+        S = function(e) {
+            try {
+                var t = document.cookie.split(e + "=");
+                if (2 === t.length) return decodeURI(t.pop().split(";").shift()).split("|")
+            } catch (i) {}
+        },
+        j = function(e, t) {
+            t = b[1] || t.toGMTString(), document.cookie = O + "=" + encodeURI(e + "|" + t) + ";expires=" + t + ";path=/"
+        };
+    if (h = e.numOfTimes || "", v = e.period || "", b = S(O) || [], e.frequency && (p = e.frequency && /(\d+)\/(\d+)(\w)/g.exec(e.frequency) || [], h = p[1] || 0, v = p[3] || ""), v) switch (v.toLowerCase()) {
+        case "minute":
+            y = 60 * (e.duration || "") * 1e3;
+            break;
+        case "hour":
+            y = 60 * (e.duration || "") * 60 * 1e3;
+            break;
+        case "day":
+            y = 24 * (e.duration || "") * 60 * 60 * 1e3
+    }
+    if (f = new Date, k = new Date(f.setTime(f.getTime() + y)), r()) return null;
+    if (j((+b[0] || 0) + 1, k), e.size = e.size || "", e.closebutton = e.closebutton || "", e.secure = e.secure || "", e.serverdomain = e.serverdomain || "", e.pagewidthlimit = e.pagewidthlimit || "", e.scrollanimation = e.scrollanimation || "", e.position = e.position || "", !(e && e.size && (s = e.size.match("([0-9]*)x([0-9]*)")) && (l = e.position.match("([a-z]*):([a-z]*)")))) return null;
+    if (e.closebutton && "none" !== e.closebutton && (u = e.closebutton.split(":"), w = {
+            side: u[0],
+            over: u[1]
+        }), d() === !0) return null;
+    if (e.pagewidthlimit && "" !== e.pagewidthlimit && (window.adk2ServiceObject.pagewidthlimit ? window.adk2ServiceObject.pagewidthlimit = Math.max(window.adk2ServiceObject.pagewidthlimit, e.pagewidthlimit) : window.adk2ServiceObject.pagewidthlimit = Number(e.pagewidthlimit), window.adk2ServiceObject.compareWidth(window.adk2ServiceObject.pagewidthlimit))) return null;
+    c = s[1], a = s[2], top !== self ? (e.u = document.referrer, e.r = "") : (e.r = document.referrer, e.u = window.location.href);
+    var x = document.createElement("div"),
+        E = document.createElement("iframe");
+    "1" !== e.scrollanimation ? x.style.position = "fixed" : x.style.position = "absolute", x.style.zIndex = 1e5;
+    var A = "adk2_slider_baner";
+    switch (l[1]) {
+        case "top":
+            x.style.top = "0px", A += " adk2Vertical";
+            break;
+        case "bottom":
+            A += " adk2Vertical", x.style.bottom = "0px";
+            break;
+        case "center":
+            if ("1" !== e.scrollanimation) x.style.top = "50%", x.style.marginTop = "-" + a / 2 + "px";
+            else {
+                var z = document.compatMode && "BackCompat" !== document.compatMode ? document.documentElement : document.body,
+                    C = document.all ? z.scrollTop : window.pageYOffset,
+                    B = window.adk2ServiceObject.getClientDimencions();
+                x.style.top = C + B.h / 2 - a / 2 + "px"
+            }
+    }
+    switch (l[2]) {
+        case "left":
+            A += " adk2Horizontal", x.style.left = "0px";
+            break;
+        case "right":
+            A += " adk2Horizontal", x.style.right = "0px";
+            break;
+        case "center":
+            x.style.left = "50%", x.style.marginLeft = "-" + c / 2 + "px"
+    }
+    var W = (w && !w.over ? Number(s[2]) + 23 : s[2]) + "px",
+        T = o(e),
+        H = T;
+    E.setAttribute("src", H), x.style.height = W, x.style.width = c, E.setAttribute("width", c), E.setAttribute("height", a), E.setAttribute("frameBorder", "0"), E.setAttribute("border", "0"), E.setAttribute("sandbox", "allow-forms allow-popups allow-scripts"), E.setAttribute("scrolling", "no"), x.setAttribute("class", A), x.setAttribute("title", l[0]), x.setAttribute("marginheight", "0px"), x.setAttribute("marginwidth", "0px");
+    var R = "adk2_slider_" + l[1] + "_" + l[2];
+    if (x.setAttribute("id", R), "1" === e.scrollanimation) {
+        window.adk2ServiceObject.elementsArr || (window.adk2ServiceObject.elementsArr = []);
+        var I = {
+            id: R,
+            alignmentV: l[1],
+            w: c,
+            h: a
+        };
+        window.adk2ServiceObject.elementsArr.push(I)
+    }
+    document.body.appendChild(x);
+    var L = document.createElement("button");
+    L.setAttribute("type", "button"), L.setAttribute("title", "close");
+    var M = document.createElement("div");
+    M.setAttribute("style", "width" + c + "px;height:" + a + "px"), L.textContent = "X", L.setAttribute("style", "cursor:pointer;font-family: Arial, Helvetica, sans-serif;font-size: 10px;color: #ffffff;padding: 5px 10px;background-color:#707070;-moz-box-shadow:0px 1px 3px rgba(000,000,000,0.3),inset 0px 0px 0px rgba(255,255,255,0);-webkit-box-shadow:0px 1px 3px rgba(000,000,000,0.3),inset 0px 0px 0px rgba(255,255,255,0);box-shadow:0px 1px 3px rgba(000,000,000,0.3),inset 0px 0px 0px rgba(255,255,255,0);text-shadow:0px -1px 0px rgba(000,000,000,0.4),0px 1px 0px rgba(255,255,255,0.3);float:right;border: 0px solid #ffffff;"), g("click", L, function() {
+        var t = document.getElementById(x.id);
+        t.parentNode.removeChild(t), e.popOnClose && (e.ci = "4", e.popOnCloseClickEvt = !0, e.rt = "popunder", m = o(e, {
+            size: 1,
+            privatePopSize: 1
+        }), window.open(m, "", "toolbar=0,location=0,directories=0,menubar=0,scrollbars=1,resizable=1,top=0,left=0,height=" + screen.height + ",width=" + screen.width))
+    }), w && w.over && (L.style.position = "absolute", L.style.right = 0, L.style[w.side] = 0), w && "top" === w.side && x.appendChild(L), x.appendChild(M), M.appendChild(E), w && "bottom" === w.side && x.appendChild(L), null == window.adk2ServiceObject.adk2resizeAtached && (window.adk2ServiceObject.adk2resizeAtached = "true", window.adk2ServiceObject.adk2ResizeEventHandler = function() {
+        var e = document.getElementsByClassName("adk2Horizontal"),
+            t = window.adk2ServiceObject.compareWidth(window.adk2ServiceObject.pagewidthlimit),
+            i = 0;
+        if (t === !0) {
+            for (i = 0; i < e.length; i++) e[i].style.display = "none";
+            window.adk2ServiceObject.bannersHide = !0
+        }
+        if (window.adk2ServiceObject.bannersHide === !0 && !t)
+            for (i = 0; i < e.length; i++) e[i].style.display = "block"
+    }, window.addEventListener ? window.addEventListener("resize", window.adk2ServiceObject.adk2ResizeEventHandler, !1) : window.attachEvent ? window.attachEvent("onresize", window.adk2ServiceObject.adk2ResizeEventHandler) : window.onresize = window.adk2ServiceObject.adk2ResizeEventHandler), window.adk2ServiceObject.getRef = function(e) {
+        return document.getElementById(e)
+    }, window.adk2ServiceObject.getBannerVOfset = function(e, t, i) {
+        var n, o = document.compatMode && "BackCompat" !== document.compatMode ? document.documentElement : document.body,
+            r = document.all ? o.scrollTop : window.pageYOffset,
+            d = window.adk2ServiceObject.getClientDimencions();
+        switch (e) {
+            case "top":
+                n = r;
+                break;
+            case "bottom":
+                n = r + d.h - i;
+                break;
+            case "center":
+                n = r + d.h / 2 - i / 2
+        }
+        return Math.round(n)
+    }, window.adk2ServiceObject.updateBannerPosition = function() {
+        for (var e = 0; e < window.adk2ServiceObject.elementsArr.length; e++) {
+            clearTimeout(window.adk2ServiceObject.timerArr[e]);
+            var t = window.adk2ServiceObject.getBannerVOfset(window.adk2ServiceObject.elementsArr[e].alignmentV, window.adk2ServiceObject.elementsArr[e].w, window.adk2ServiceObject.elementsArr[e].h);
+            window.adk2ServiceObject.animate(window.adk2ServiceObject.elementsArr[e].id, t, e)
+        }
+    }, window.adk2ServiceObject.addEventFunc = function(e, t) {
+        window.addEventListener ? window.addEventListener(e, t, !1) : window.attachEvent ? window.attachEvent("on" + e, t) : window["on" + e] = t
+    }, window.adk2ServiceObject.updateBanners = function() {
+        null !== window.adk2ServiceObject.resizeTimer && clearTimeout(window.adk2ServiceObject.resizeTimer), window.adk2ServiceObject.resizeTimer = setTimeout(window.adk2ServiceObject.updateBannerPosition, 500)
+    }, "1" !== e.scrollanimation || window.adk2ServiceObject.scrollFuncAdded || (window.adk2ServiceObject.scrollFuncAdded = !0, window.adk2ServiceObject.addEventFunc("scroll", window.adk2ServiceObject.updateBanners), window.adk2ServiceObject.addEventFunc("resize", window.adk2ServiceObject.updateBanners)), window.adk2ServiceObject.animate = function(e, t, i) {
+        if (document.getElementById && document.getElementsByTagName) {
+            var n = Math.round(Number(document.getElementById(e).style.top.replace("px", "")));
+            if (n === t) clearTimeout(window.adk2ServiceObject.timerArr[R]);
+            else {
+                var o = 1,
+                    r = Math.round((t - n) / 20);
+                0 > t - n && r > -1 && (o = -1), 0 === r && (r = 1);
+                var d = n + r * o;
+                window.adk2ServiceObject.getRef(e).style.top = d + "px", window.adk2ServiceObject.timerArr[i] = setTimeout('window.adk2ServiceObject.animate("' + e + '",' + t + "," + i + ");", 10)
+            }
+        }
+    }, window.adk2ServiceObject.timerArr = []
+}(window.adParams || {});
